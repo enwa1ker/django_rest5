@@ -1,0 +1,19 @@
+{% extends 'product/base.html' %}
+{% block title %}Отзывы{% endblock %}
+{% block content %}
+<h1 class="h4 mb-3">Отзывы</h1>
+{% if reviews %}
+<ul class="list-group">
+    {% for r in reviews %}
+    <li class="list-group-item">
+        <a href="{% url 'page-review-detail' r.pk %}" class="text-decoration-none text-dark">
+            <small class="text-muted">{{ r.product.title }}</small>
+            <div>{{ r.text|truncatechars:100 }}</div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="text-muted">Отзывов пока нет.</p>
+{% endif %}
+{% endblock %}

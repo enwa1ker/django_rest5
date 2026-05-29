@@ -1,0 +1,22 @@
+{% extends 'product/base.html' %}
+{% block title %}Товары{% endblock %}
+{% block content %}
+<h1 class="h4 mb-3">Товары</h1>
+{% if products %}
+<ul class="list-group">
+    {% for p in products %}
+    <li class="list-group-item">
+        <a href="{% url 'page-product-detail' p.pk %}" class="d-flex justify-content-between text-decoration-none text-dark">
+            <span>
+                {{ p.title }}
+                <small class="text-muted d-block">{{ p.category.name }}</small>
+            </span>
+            <span>{{ p.price_som }}</span>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="text-muted">Товаров нет. Можно добавить в <a href="/admin/product/product/add/">админке</a>.</p>
+{% endif %}
+{% endblock %}

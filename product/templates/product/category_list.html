@@ -1,0 +1,17 @@
+{% extends 'product/base.html' %}
+{% block title %}Категории{% endblock %}
+{% block content %}
+<h1 class="h4 mb-3">Категории</h1>
+{% if categories %}
+<ul class="list-group">
+    {% for cat in categories %}
+    <li class="list-group-item d-flex justify-content-between">
+        <a href="{% url 'page-category-detail' cat.pk %}">{{ cat.name }}</a>
+        <span class="text-muted">{{ cat.products.count }} шт.</span>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="text-muted">Пока ничего нет — добавьте в <a href="/admin/">админке</a>.</p>
+{% endif %}
+{% endblock %}

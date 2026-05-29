@@ -1,0 +1,19 @@
+{% extends 'product/base.html' %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<h1 class="h4 mb-3">Главная</h1>
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between">
+        <span>Категории — {{ categories_count }}</span>
+        <a href="{% url 'page-category-list' %}">открыть</a>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+        <span>Товары — {{ products_count }}</span>
+        <a href="{% url 'page-product-list' %}">открыть</a>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+        <span>Отзывы — {{ reviews_count }}</span>
+        <a href="{% url 'page-review-list' %}">открыть</a>
+    </li>
+</ul>
+{% endblock %}

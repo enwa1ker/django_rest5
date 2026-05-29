@@ -1,0 +1,18 @@
+{% extends 'product/base.html' %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block content %}
+<p class="mb-3"><a href="{% url 'page-category-list' %}">назад</a></p>
+<h1 class="h4 mb-3">{{ category.name }}</h1>
+{% if products %}
+<ul class="list-group">
+    {% for p in products %}
+    <li class="list-group-item d-flex justify-content-between">
+        <a href="{% url 'page-product-detail' p.pk %}">{{ p.title }}</a>
+        <span>{{ p.price_som }}</span>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="text-muted">В этой категории пока нет товаров.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'product/base.html' %}
+{% block title %}Отзыв{% endblock %}
+{% block content %}
+<p class="mb-3"><a href="{% url 'page-review-list' %}">назад</a></p>
+
+<p class="text-muted mb-2">
+    Товар: <a href="{% url 'page-product-detail' review.product.pk %}">{{ review.product.title }}</a>
+</p>
+<p>{{ review.text }}</p>
+{% endblock %}

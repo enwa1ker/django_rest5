@@ -1,0 +1,24 @@
+{% extends 'product/base.html' %}
+{% block title %}{{ product.title }}{% endblock %}
+{% block content %}
+<p class="mb-3"><a href="{% url 'page-product-list' %}">назад к товарам</a></p>
+
+<h1 class="h4">{{ product.title }}</h1>
+<p class="text-muted mb-1">
+    Категория: <a href="{% url 'page-category-detail' product.category.pk %}">{{ product.category.name }}</a>
+</p>
+<p class="mb-3"><strong>{{ product.price_som }}</strong></p>
+<p>{{ product.description }}</p>
+
+<hr class="my-4">
+<h2 class="h6">Отзывы</h2>
+{% if reviews %}
+<ul class="list-group">
+    {% for r in reviews %}
+    <li class="list-group-item">{{ r.text }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="text-muted">Пока без отзывов.</p>
+{% endif %}
+{% endblock %}
