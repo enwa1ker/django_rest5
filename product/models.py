@@ -37,7 +37,16 @@ class Product(models.Model):
 
 
 class Review(models.Model):
+    STARS_CHOICES = [
+        (1, '1 звезда'),
+        (2, '2 звезды'),
+        (3, '3 звезды'),
+        (4, '4 звезды'),
+        (5, '5 звезд'),
+    ]
+    
     text = models.TextField()
+    stars = models.IntegerField(choices=STARS_CHOICES, default=5)
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
