@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import viewsets, generics
 
 from .models import Category, Product, Review
 from .serializers import (
@@ -10,36 +10,37 @@ from .serializers import (
 )
 
 
-class CategoryListView(generics.ListAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategoryWithCountSerializer
-
-
-class CategoryDetailView(generics.RetrieveAPIView):
+class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    
+    def get_serializer_class(self):
+        # Use CategoryWithCountSerializer for list view
+        if self.action == 'list':
+            return CategoryWithCountSerializer
+        return CategorySerializer
 
 
-class ProductListView(generics.ListAPIView):
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
-class ProductDetailView(generics.RetrieveAPIView):
+class ProductWithReviewsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductWithReviewsSerializer
+
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+
+class CategoryWithCountListView(generics.ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryWithCountSerializer
 
 
 class ProductWithReviewsListView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductWithReviewsSerializer
-
-
-class ReviewListView(generics.ListAPIView):
-    queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
-
-
-class ReviewDetailView(generics.RetrieveAPIView):
-    queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
