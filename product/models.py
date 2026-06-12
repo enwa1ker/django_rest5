@@ -1,4 +1,28 @@
 from django.db import models
+from django.contrib.auth.models import User
+import random
+import string
+
+
+class ConfirmationCode(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='confirmation_code'
+    )
+    code = models.CharField(max_length=6, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Код подтверждения для {self.user.username}"
+    
+    class Meta:
+        verbose_name = 'код подтверждения'
+        verbose_name_plural = 'коды подтверждения'
+    
+    @staticmethod
+    def generate_code():
+        return ''.join(random.choices(string.digits, k=6))
 
 
 class Category(models.Model):

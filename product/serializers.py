@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from django.db.models import Avg
+from django.contrib.auth.models import User
 
-from .models import Category, Product, Review
+from .models import Category, Product, Review, ConfirmationCode
 
 
 def validate_category_name(value):

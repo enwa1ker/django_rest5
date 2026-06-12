@@ -1,6 +1,5 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-
 from . import views
 from .api_root import api_root
 
@@ -13,4 +12,7 @@ urlpatterns = [
     path('', api_root, name='api-root'),
     path('products/reviews/', views.ProductWithReviewsListView.as_view(), name='product-reviews-list'),
     path('', include(router.urls)),
+    path('users/register/', views.register_view),
+    path('users/login/', views.login_view),
+    path('users/confirm/', views.confirm_view),
 ]
